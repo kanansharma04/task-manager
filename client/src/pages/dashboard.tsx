@@ -28,6 +28,7 @@ export default function Dashboard() {
     try {
       const res = await fetch(`${API_URL}/tasks`, {
         headers: { Authorization: `Bearer ${token}` },
+        credentials: "include", // Add this for cookies if needed
       });
       if (!res.ok) throw new Error("Failed to fetch tasks");
       const data = await res.json();
@@ -50,6 +51,7 @@ export default function Dashboard() {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ title, description }),
+        credentials: "include",
       });
       setTitle("");
       setDescription("");
@@ -64,6 +66,7 @@ export default function Dashboard() {
       await fetch(`${API_URL}/tasks/${id}/toggle`, {
         method: "PATCH",
         headers: { Authorization: `Bearer ${token}` },
+        credentials: "include",
       });
       await fetchTasks();
     } catch (err) {}
@@ -76,6 +79,7 @@ export default function Dashboard() {
       await fetch(`${API_URL}/tasks/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
+        credentials: "include",
       });
       await fetchTasks();
     } catch (err) {}
@@ -96,6 +100,7 @@ export default function Dashboard() {
         method: "PUT",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ title: editTitle, description: editDescription }),
+        credentials: "include",
       });
       setEditingId(null);
       setEditTitle("");

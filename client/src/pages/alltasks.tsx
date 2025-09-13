@@ -19,6 +19,7 @@ export default function AllTasksPage() {
     try {
       const res = await fetch(`${API_URL}/tasks`, {
         headers: { Authorization: `Bearer ${token}` },
+        credentials: "include",
       });
       if (!res.ok) throw new Error("Failed to fetch tasks");
       const data = await res.json();
