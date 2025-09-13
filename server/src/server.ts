@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 4000;
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // frontend URL
+    origin: "https://task-manager-frontend-steel-phi.vercel.app/login", // frontend URL
     credentials: true,
   })
 );
