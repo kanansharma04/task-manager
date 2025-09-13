@@ -21,11 +21,12 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
+  const API_URL = "https://task-manager-server-ofko.onrender.com";
 
   const fetchTasks = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:3000/tasks", {
+      const res = await fetch(`${API_URL}/tasks`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) throw new Error("Failed to fetch tasks");
@@ -45,7 +46,7 @@ export default function Dashboard() {
   const createTask = async () => {
     setActionLoading("Adding task...");
     try {
-      await fetch("http://localhost:3000/tasks", {
+      await fetch(`${API_URL}/tasks`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ title, description }),
@@ -60,7 +61,7 @@ export default function Dashboard() {
   const toggleTask = async (id: number) => {
     setActionLoading("Updating task...");
     try {
-      await fetch(`http://localhost:3000/tasks/${id}/toggle`, {
+      await fetch(`${API_URL}/tasks/${id}/toggle`, {
         method: "PATCH",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -72,7 +73,7 @@ export default function Dashboard() {
   const deleteTask = async (id: number) => {
     setActionLoading("Deleting task...");
     try {
-      await fetch(`http://localhost:3000/tasks/${id}`, {
+      await fetch(`${API_URL}/tasks/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -91,7 +92,7 @@ export default function Dashboard() {
     if (editingId === null) return;
     setActionLoading("Saving changes...");
     try {
-      await fetch(`http://localhost:3000/tasks/${editingId}`, {
+      await fetch(`${API_URL}/tasks/${editingId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ title: editTitle, description: editDescription }),

@@ -7,11 +7,12 @@ export default function Signup() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+  const API_URL = "https://task-manager-server-ofko.onrender.com";
 
   const handleSignup = async () => {
     setLoading(true);
     setError(null);
-    const res = await fetch("http://localhost:3000/auth/signup", {
+    const res = await fetch(`${API_URL}/auth/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),

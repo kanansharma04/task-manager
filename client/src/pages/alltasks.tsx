@@ -12,11 +12,12 @@ export default function AllTasksPage() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("token");
+  const API_URL = "https://task-manager-server-ofko.onrender.com";
 
   const fetchTasks = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:3000/tasks", {
+      const res = await fetch(`${API_URL}/tasks`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) throw new Error("Failed to fetch tasks");
