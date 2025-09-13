@@ -9,10 +9,9 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-
 app.use(
   cors({
-    origin: "https://task-manager-frontend-steel-phi.vercel.app", // frontend URL
+    origin: true, // Accept requests from any origin for development
     credentials: true,
   })
 );
@@ -35,4 +34,5 @@ process.on("SIGINT", async () => {
 
 app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}`);
+});
 });
