@@ -9,10 +9,12 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+// Fix: Set allowed origin explicitly and add optionsSuccessStatus for CORS preflight
 app.use(
   cors({
-    origin: true, // Accept requests from any origin for development
+    origin: "https://task-manager-frontend-steel-phi.vercel.app", // your frontend URL
     credentials: true,
+    optionsSuccessStatus: 200,
   })
 );
 
@@ -35,4 +37,4 @@ process.on("SIGINT", async () => {
 app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}`);
 });
-});
+
